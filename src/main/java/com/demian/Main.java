@@ -1,7 +1,5 @@
 package com.demian;
 
-import org.openjdk.jmh.annotations.Benchmark;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,13 +15,11 @@ public class Main {
         countDownLatchWay();
     }
 
-    @Benchmark
     public static void streamWay() {
         int result = Stream.of(1, 2, 3, 4, 5).parallel().map(i -> 2 * i).reduce(0, Integer::sum);
         System.out.println("result streamWay: " + result);
     }
 
-    @Benchmark
     public static void conventionalWay() {
         List<Integer> input = Arrays.asList(1, 2, 3, 4, 5);
         List<Integer> firstOutput = new ArrayList<>();
@@ -38,7 +34,6 @@ public class Main {
         System.out.println("result conventionalWay: " + sum);
     }
 
-    @Benchmark
     public static void countDownLatchWay() throws InterruptedException {
         final List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
         final CountDownLatch cdl = new CountDownLatch(list.size());
